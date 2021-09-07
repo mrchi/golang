@@ -15,3 +15,9 @@ Some code written in the process of learning Golang.
 - 定价: 79
 - 丛书: 计算机科学丛书
 - ISBN: 9787111558422
+
+## [Golang-Tutorial-Video-By-AceId](Golang-Tutorial-Video-By-AceId)
+
+[8小时转职Golang工程师\(如果你想低成本学习Go语言\)\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1gf4y1r79E)
+
+作者：刘丹冰 AceId
