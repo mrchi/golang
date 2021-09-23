@@ -28,5 +28,5 @@ func main() {
 	fmt.Printf("a = %v\n", a)
 	fmt.Println("main ended.")
 
-	// 两个 goroutine 的代码没有同时执行到管道操作语句时，先到的 goroutine 会阻塞等待
+	// 无缓冲 channel，两个 goroutine 的代码没有同时执行到管道操作语句时，先到的 goroutine 会阻塞等待
 }
