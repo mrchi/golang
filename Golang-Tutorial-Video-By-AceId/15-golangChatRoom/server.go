@@ -50,39 +50,31 @@ func (this *Server) BroadCast(user *User, msg string) {
 
 // 处理业务
 func (this *Server) Handle(conn net.Conn) {
-	fmt.Println("连接建立成功")
-
 	// 创建 user
-	user := NewUser(conn)
+	user := NewUser(conn, this)
 
-	// 用户加入到在线用户列表中
-	this.mapLock.Lock()
-	this.OnlineMap[user.Name] = user
-	this.mapLock.Unlock()
-
-	// 广播消息
-	this.BroadCast(user, "上线了")
+	// 用户上线
+	user.Online()
 
 	// 接收客户端发送的消息
 	go func() {
 		buf := make([]byte, 4096)
 		for {
 			n, err := conn.Read(buf)
-
 			// 下线通知
 			if n == 0 {
-				this.BroadCast(user, "下线")
+				user.Offline()
 				return
 			}
-
 			// 错误处理
 			if err != nil && err != io.EOF {
 				fmt.Printf("Conn Read err: %v\n", err)
 			}
 
-			// 提取用户消息并广播
+			// 提取用户消息
 			msg := string(buf[:n-1])
-			this.BroadCast(user, msg)
+			// 用户处理消息
+			user.DoMessage(msg)
 		}
 	}()
 
@@ -113,6 +105,7 @@ func (this *Server) Start() {
 			fmt.Printf("listener.Accept error: %v\n", err)
 			continue
 		}
+		fmt.Printf("连接 %v 建立成功\n", conn.RemoteAddr())
 
 		// 业务处理
 		go this.Handle(conn)
