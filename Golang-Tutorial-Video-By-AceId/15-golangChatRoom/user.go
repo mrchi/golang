@@ -1,6 +1,9 @@
 package main
 
-import "net"
+import (
+	"fmt"
+	"net"
+)
 
 type User struct {
 	Name   string
@@ -59,6 +62,15 @@ func (this *User) Offline() {
 
 // 处理正常消息
 func (this *User) DoMessage(msg string) {
-	this.server.BroadCast(this, msg)
-
+	// 查询在线用户
+	if msg == "who" {
+		this.server.mapLock.Lock()
+		for _, user := range this.server.OnlineMap {
+			onlineMsg := fmt.Sprintf("[%v]%v 在线...", user.Addr, user.Name)
+			this.Ch <- onlineMsg
+		}
+		this.server.mapLock.Unlock()
+	} else {
+		this.server.BroadCast(this, msg)
+	}
 }
