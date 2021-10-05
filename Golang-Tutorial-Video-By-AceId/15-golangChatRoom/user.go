@@ -31,11 +31,15 @@ func NewUser(conn net.Conn, server *Server) *User {
 	return &user
 }
 
+// 发送消息给客户端
+func (this *User) SendMessage(message string) {
+	this.conn.Write([]byte(message + "\n"))
+}
+
 // 监听当前 User channel 的方法，如果有消息就发给客户端
 func (this *User) ListenMessage() {
 	for {
-		msg := <-this.Ch
-		this.conn.Write([]byte(msg + "\n"))
+		this.SendMessage(<-this.Ch)
 	}
 }
 
@@ -59,6 +63,12 @@ func (this *User) Offline() {
 
 	// 广播下线消息
 	this.server.BroadCast(this, "下线了")
+}
+
+// 被强制下线
+func (this *User) ForceOffline() {
+	this.SendMessage("你已超时，强制下线")
+	close(this.Ch)
 }
 
 // 处理正常消息
