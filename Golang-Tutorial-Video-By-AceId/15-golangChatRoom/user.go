@@ -78,7 +78,7 @@ func (this *User) DoMessage(msg string) {
 		this.server.mapLock.Lock()
 		for _, user := range this.server.OnlineMap {
 			onlineMsg := fmt.Sprintf("[%v]%v 在线...", user.Addr, user.Name)
-			this.Ch <- onlineMsg
+			this.SendMessage(onlineMsg)
 		}
 		this.server.mapLock.Unlock()
 
@@ -88,7 +88,7 @@ func (this *User) DoMessage(msg string) {
 		// 判断新名称是否已经被使用
 		_, ok := this.server.OnlineMap[newName]
 		if ok {
-			this.Ch <- fmt.Sprintf("用户名 %v 已被占用", newName)
+			this.SendMessage(fmt.Sprintf("用户名 %v 已被占用", newName))
 		} else {
 			this.server.mapLock.Lock()
 			delete(this.server.OnlineMap, this.Name)
@@ -96,8 +96,30 @@ func (this *User) DoMessage(msg string) {
 			this.server.mapLock.Unlock()
 
 			this.Name = newName
-			this.Ch <- fmt.Sprintf("已更新用户名：%v", newName)
+			this.SendMessage(fmt.Sprintf("已更新用户名：%v", newName))
 		}
+	} else if len(msg) > 3 && msg[:3] == "to|" {
+		// 发送私聊消息，消息格式 to|zhang3|hello
+
+		// 获取对方用户名
+		remoteName := strings.Split(msg, "|")[1]
+		if remoteName == "" {
+			this.SendMessage("消息格式不正确")
+			return
+		}
+		// 根据用户名获取到 User 对象
+		remoteUser, ok := this.server.OnlineMap[remoteName]
+		if !ok {
+			this.SendMessage("该用户名不存在")
+			return
+		}
+		// 获取消息内容并发送
+		content := strings.Split(msg, "|")[2]
+		if content == "" {
+			this.SendMessage("消息内容为空")
+			return
+		}
+		remoteUser.SendMessage(fmt.Sprintf("[From %v]%v", this.Name, content))
 	} else {
 		this.server.BroadCast(this, msg)
 	}

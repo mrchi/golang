@@ -88,7 +88,7 @@ func (this *Server) Handle(conn net.Conn) {
 	for {
 		select {
 		// 当前用户超时
-		case <-time.After(time.Second * 5):
+		case <-time.After(time.Second * 10):
 			user.ForceOffline()
 			conn.Close()
 			return
