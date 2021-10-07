@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net"
 )
@@ -30,8 +31,18 @@ func NewClient(serverIp string, serverPort int) *Client {
 	return &client
 }
 
+var serverIp string
+var serverPort int
+
+// 一把在 init 中定义命令行参数
+func init() {
+	flag.StringVar(&serverIp, "ip", "127.0.0.1", "服务器 IP")
+	flag.IntVar(&serverPort, "port", 8000, "服务器端口号")
+}
+
 func main() {
-	NewClient("127.0.0.1", 8000)
+	flag.Parse()
+	NewClient(serverIp, serverPort)
 
 	select {}
 }
