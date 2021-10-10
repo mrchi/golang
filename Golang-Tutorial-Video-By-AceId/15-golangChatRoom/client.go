@@ -3,7 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
 	"net"
+	"os"
 )
 
 type Client struct {
@@ -31,6 +33,29 @@ func (this *Client) Menu() bool {
 	}
 }
 
+// 更新用户名
+func (this *Client) UpdateName() bool {
+	fmt.Println(">>>请输入用户名：")
+	fmt.Scanln(&this.Name)
+
+	fmt.Println(this.Name)
+
+	msg := fmt.Sprintf("rename|%v\n", this.Name)
+	_, err := this.conn.Write([]byte(msg))
+	if err != nil {
+		fmt.Printf("conn.Write error, %v\n", err)
+		return false
+	} else {
+		return true
+	}
+}
+
+// 处理服务端发送的消息
+func (this *Client) HandleResponse() {
+	// 永久阻塞，将 this.conn 中的数据 copy 到 os.Stdout 中
+	io.Copy(os.Stdout, this.conn)
+}
+
 func (this *Client) Run() {
 	// 如果 flag 为 0 就退出
 	for this.flag != 0 {
@@ -47,6 +72,7 @@ func (this *Client) Run() {
 			break
 		case 3:
 			fmt.Println("进入修改用户名模式")
+			this.UpdateName()
 			break
 		}
 	}
@@ -83,6 +109,9 @@ func init() {
 func main() {
 	flag.Parse()
 	client := NewClient(serverIp, serverPort)
+
+	// 处理服务器消息
+	go client.HandleResponse()
 
 	client.Run()
 }
