@@ -38,8 +38,6 @@ func (this *Client) UpdateName() bool {
 	fmt.Println(">>>请输入用户名：")
 	fmt.Scanln(&this.Name)
 
-	fmt.Println(this.Name)
-
 	msg := fmt.Sprintf("rename|%v\n", this.Name)
 	_, err := this.conn.Write([]byte(msg))
 	if err != nil {
@@ -47,6 +45,27 @@ func (this *Client) UpdateName() bool {
 		return false
 	} else {
 		return true
+	}
+}
+
+// 广播模式
+func (this *Client) Broadcast() {
+	var msg string
+	for {
+		fmt.Println(">>>请输入广播内容（exit 退出）：")
+		fmt.Scanln(&msg)
+
+		if msg == "exit" {
+			break
+		}
+
+		if len(msg) != 0 {
+			_, err := this.conn.Write([]byte(msg + "\n"))
+			if err != nil {
+				fmt.Printf("conn.Write error, %v\n", err)
+				break
+			}
+		}
 	}
 }
 
@@ -66,6 +85,7 @@ func (this *Client) Run() {
 		switch this.flag {
 		case 1:
 			fmt.Println("进入广播模式")
+			this.Broadcast()
 			break
 		case 2:
 			fmt.Println("进入私聊模式")
