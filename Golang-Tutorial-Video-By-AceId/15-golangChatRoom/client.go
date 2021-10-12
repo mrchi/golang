@@ -69,6 +69,45 @@ func (this *Client) Broadcast() {
 	}
 }
 
+// 查询用户
+func (this *Client) SelectUser() {
+	_, err := this.conn.Write([]byte("who\n"))
+	if err != nil {
+		fmt.Printf("conn.Write error, %v\n", err)
+	}
+}
+
+// 私聊模式
+func (this *Client) PrivateChat() {
+	this.SelectUser()
+
+	var remoteName string
+	fmt.Println(">>>请输入聊天对象用户名（exit 退出）：")
+	fmt.Scanln(&remoteName)
+
+	if remoteName == "exit" {
+		return
+	}
+
+	var msg string
+	for {
+		fmt.Println(">>>请输入私聊用户内容（exit 退出）：")
+		fmt.Scanln(&msg)
+
+		if msg == "exit" {
+			break
+		}
+
+		if len(msg) != 0 {
+			_, err := this.conn.Write([]byte(fmt.Sprintf("to|%v|%v\n", remoteName, msg)))
+			if err != nil {
+				fmt.Printf("conn.Write error, %v\n", err)
+				break
+			}
+		}
+	}
+}
+
 // 处理服务端发送的消息
 func (this *Client) HandleResponse() {
 	// 永久阻塞，将 this.conn 中的数据 copy 到 os.Stdout 中
@@ -89,6 +128,7 @@ func (this *Client) Run() {
 			break
 		case 2:
 			fmt.Println("进入私聊模式")
+			this.PrivateChat()
 			break
 		case 3:
 			fmt.Println("进入修改用户名模式")
