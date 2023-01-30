@@ -2,6 +2,14 @@
 
 Some code written in the process of learning Golang.
 
+## [Head-First-Go](Head-First-Go)
+
+[Head First Go语言程序设计 \(豆瓣\)](https://book.douban.com/subject/35237045/)
+
+[微信读书传送门](https://weread.qq.com/web/bookDetail/cc0329f0720867eecc0f00a)
+
+- ISBN: 9787111664932
+
 ## [The-Go-Programming-Language](The-Go-Programming-Language)
 
 [Go程序设计语言 \(豆瓣\)](https://book.douban.com/subject/27044219/)
