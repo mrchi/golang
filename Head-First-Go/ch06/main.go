@@ -43,4 +43,17 @@ func main() {
 	mySlice7 = append(mySlice7, "X", "Y")
 	fmt.Printf("Array: %#v, Slice: %#v\n", myArray2, mySlice7)
 
+	fmt.Printf("%#v\n", inRange(2, 4, 1, 2, 3, 4, 5))
+	mySlice8 := []float64{1, 2, 3, 4, 5}
+	fmt.Printf("%#v\n", inRange(2, 4, mySlice8...))
+}
+
+func inRange(min float64, max float64, numbers ...float64) []float64 {
+	var result []float64
+	for _, number := range numbers {
+		if number >= min && number <= max {
+			result = append(result, number)
+		}
+	}
+	return result
 }
