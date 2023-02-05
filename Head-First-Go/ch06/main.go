@@ -36,4 +36,11 @@ func main() {
 	mySlice4[2] = 88
 	fmt.Println(myArray, mySlice4, mySlice5, mySlice6)
 
+	// append 后的底层数组可能与原数组不同
+	myArray2 := [3]string{"a", "b", "c"}
+	mySlice7 := myArray2[:2]
+	fmt.Printf("Array: %#v, Slice: %#v\n", myArray2, mySlice7)
+	mySlice7 = append(mySlice7, "X", "Y")
+	fmt.Printf("Array: %#v, Slice: %#v\n", myArray2, mySlice7)
+
 }
