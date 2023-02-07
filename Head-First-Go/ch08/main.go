@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"magazine"
+)
 
 // 基于 struct 定义类型
 type car struct {
@@ -40,6 +43,24 @@ func main() {
 	showInfo(volvoSUV)
 	fmt.Println()
 
+	// struct 字面量
+	subscriber := magazine.Subscriber{Name: "Zhang3", Rate: 4.99, Active: true}
+	fmt.Printf("%#v\n", subscriber)
+	fmt.Println()
+
+	// 给内部 struct 赋值
+	address := magazine.Address{Street: "Xueyuan Road", City: "Beijing"}
+	subscriber.HomeAddress = address
+	fmt.Printf("%#v\n", subscriber)
+	subscriber.HomeAddress.PostalCode = "100083"
+	fmt.Printf("%#v\n", subscriber)
+	fmt.Println()
+
+	// 嵌入匿名 struct
+	employee := magazine.Employee{Name: "Li4", Salary: 99.99}
+	employee.PostalCode = "100083"
+	employee.Address.City = "Beijing"
+	fmt.Printf("%#v\n", employee)
 }
 
 func showInfo(c car) {
