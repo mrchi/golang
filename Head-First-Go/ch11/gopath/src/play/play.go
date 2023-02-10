@@ -35,6 +35,15 @@ func main() {
 	playList(device, mixtype)
 	fmt.Println()
 
-	// 但只能调用接口定义的方法，其他方法不可以
-	// 报错：device.Record()
+	// 但只能调用接口定义的方法，其他方法不可以，这会报错：device.Record()
+	// 通过类型断言取回具体类型
+	recorder := device.(gadget.TapeRecorder)
+	recorder.Record()
+
+	// 类型断言有第二个可选的返回值来表明断言是否成功
+	// 以下是断言失败的示例
+	player, ok := device.(gadget.TapePlayer)
+	if ok {
+		player.Batteries = "No.5"
+	}
 }
