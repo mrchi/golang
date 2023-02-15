@@ -1,0 +1,6 @@
+x
+y
+z
+<script>alert('hi');</script>
+foo
+bar
