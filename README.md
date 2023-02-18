@@ -2,6 +2,22 @@
 
 Some code written in the process of learning Golang.
 
+## [Go-Programming-from-Beginners-to-Masters](Go-Programming-from-Beginners-to-Masters)
+
+### Go语言精进之路：从新手到高手的编程思想、方法和技巧 1
+
+[Go语言精进之路 \(豆瓣\)](https://book.douban.com/subject/35720728/)
+
+- 作者: 白明
+- 出版社: 机械工业出版社
+- 副标题: 从新手到高手的编程思想、方法和技巧 1
+- 出版年: 2021-12-17
+- 页数: 432
+- 定价: 99
+- 装帧: 平装
+- 丛书: 华章程序员书库
+- ISBN: 9787111698210
+
 ## [Head-First-Go](Head-First-Go)
 
 [Head First Go语言程序设计 \(豆瓣\)](https://book.douban.com/subject/35237045/)
