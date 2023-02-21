@@ -2,6 +2,19 @@
 
 Some code written in the process of learning Golang.
 
+## [Go-Tour-By-Flysnow](Go-Tour-By-Flysnow)
+
+[打开Go语言之门 \(豆瓣\)](https://book.douban.com/subject/36171041/)
+
+- 作者: 飞雪无情
+- 出版社: 机械工业出版社
+- 副标题: 入门、实战与进阶
+- 出版年: 2022-12-1
+- 页数: 214
+- 定价: 89.00
+- 装帧: 平装
+- ISBN: 9787111712459
+
 ## [Go-Programming-from-Beginners-to-Masters](Go-Programming-from-Beginners-to-Masters)
 
 ### Go语言精进之路：从新手到高手的编程思想、方法和技巧 1
