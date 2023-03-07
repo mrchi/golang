@@ -98,19 +98,23 @@ func opSyncPool(sp *sync.Pool) {
 }
 
 func BenchmarkBytePool(b *testing.B) {
-	// BytePoolCap是自定义的，所以它存放的对象类型明确，不用经过一层类型断言转换，还可以自己定制对象池的大小等。
-	bpc := NewBytePoolCap(500, 1024, 1024)
-	opBytePool(bpc)
+	for i := 0; i < b.N; i++ {
+		// BytePoolCap是自定义的，所以它存放的对象类型明确，不用经过一层类型断言转换，还可以自己定制对象池的大小等。
+		bpc := NewBytePoolCap(500, 1024, 1024)
+		opBytePool(bpc)
+	}
 }
 
 func BenchmarkSyncPool(b *testing.B) {
-	// sync.Pool可以存放任何对象，但需要经过一层类型断言转换
-	sp := &sync.Pool{
-		New: func() interface{} {
-			return make([]byte, 1024)
-		},
+	for i := 0; i < b.N; i++ {
+		// sync.Pool可以存放任何对象，但需要经过一层类型断言转换
+		sp := &sync.Pool{
+			New: func() interface{} {
+				return make([]byte, 1024)
+			},
+		}
+		opSyncPool(sp)
 	}
-	opSyncPool(sp)
 }
 
 func main() {}
