@@ -1,0 +1,13 @@
+linters:
+  disable-all: true
+  enable:
+    - unused
+    - misspell
+    - errcheck
+
+linters-settings:
+  misspell:
+    locale: US
+
+service:
+  golangci-lint-version: 1.51.2
