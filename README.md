@@ -1,8 +1,8 @@
-# learn-golang
+# golang
 
-Some code written in the process of learning Golang.
+Code snippets of golang learning.
 
-## [Go-Tour-By-Flysnow](Go-Tour-By-Flysnow)
+## [Go-Tour-By-Flysnow](Go-Tour-By-Flysnow)✅
 
 [打开Go语言之门 \(豆瓣\)](https://book.douban.com/subject/36171041/)
 
@@ -31,7 +31,7 @@ Some code written in the process of learning Golang.
 - 丛书: 华章程序员书库
 - ISBN: 9787111698210
 
-## [Head-First-Go](Head-First-Go)
+## [Head-First-Go](Head-First-Go)✅
 
 [Head First Go语言程序设计 \(豆瓣\)](https://book.douban.com/subject/35237045/)
 
@@ -53,7 +53,7 @@ Some code written in the process of learning Golang.
 - 丛书: 计算机科学丛书
 - ISBN: 9787111558422
 
-## [Golang-Tutorial-Video-By-AceId](Golang-Tutorial-Video-By-AceId)
+## [Golang-Tutorial-Video-By-AceId](Golang-Tutorial-Video-By-AceId)✅
 
 [8小时转职Golang工程师\(如果你想低成本学习Go语言\)\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1gf4y1r79E)
 
