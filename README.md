@@ -58,3 +58,16 @@ Code snippets of golang learning.
 [8小时转职Golang工程师\(如果你想低成本学习Go语言\)\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1gf4y1r79E)
 
 作者：刘丹冰 AceId
+
+## [Black-Hat-Go](Black-Hat-Go)
+
+[Go黑帽子 渗透测试编程之道 \(豆瓣\)](https://book.douban.com/subject/35596332/)
+
+- 作者: [美]汤姆·斯蒂尔 （Tom Steele） 克里斯·帕顿（Chris Patten） 丹·科特曼（Dan Kottmann） 著 贾玉彬 朱钱杭 译
+- 出版社: 清华大学出版社
+- 原作名: Black Hat Go
+- 出版年: 2021-9
+- 页数: 334
+- 定价: 99
+- 装帧: 平装
+- ISBN: 9787302588245
