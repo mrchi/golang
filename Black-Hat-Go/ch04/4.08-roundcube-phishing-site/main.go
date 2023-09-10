@@ -9,7 +9,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const LISTENING_ADDR string = "localhost:8000"
+const listenAddr string = "localhost:8000"
 
 func login(w http.ResponseWriter, r *http.Request) {
 	logrus.WithFields(logrus.Fields{
@@ -35,6 +35,6 @@ func main() {
 	// 使用 wget -r -p -k host 下载源站内容并存为 static-files
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("static-files")))
 
-	log.Printf("Listening on %s\n", LISTENING_ADDR)
-	http.ListenAndServe(LISTENING_ADDR, r)
+	log.Printf("Listening on %s\n", listenAddr)
+	http.ListenAndServe(listenAddr, r)
 }
