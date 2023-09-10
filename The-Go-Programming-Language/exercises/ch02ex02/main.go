@@ -5,9 +5,9 @@ import (
 	"os"
 	"strconv"
 
-	"./lengthconv"
-	"./tempconv"
-	"./weightconv"
+	"github.com/mrchi/golang/The-Go-Programming-Language/exercises/ch02ex02/lengthconv"
+	"github.com/mrchi/golang/The-Go-Programming-Language/exercises/ch02ex02/tempconv"
+	"github.com/mrchi/golang/The-Go-Programming-Language/exercises/ch02ex02/weightconv"
 )
 
 func main() {

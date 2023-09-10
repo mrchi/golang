@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"./popcount"
+	"github.com/mrchi/golang/The-Go-Programming-Language/ch02/popcount/popcount"
 )
 
 func main() {
