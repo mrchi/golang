@@ -6,7 +6,7 @@ import (
 	"net"
 )
 
-const LISTENING_ADDRESS string = "localhost:8000"
+const listenAddr string = "localhost:8000"
 
 func echo(conn net.Conn) {
 	defer conn.Close()
@@ -17,11 +17,11 @@ func echo(conn net.Conn) {
 }
 
 func main() {
-	listener, err := net.Listen("tcp", LISTENING_ADDRESS)
+	listener, err := net.Listen("tcp", listenAddr)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	log.Printf("Listening on %s", LISTENING_ADDRESS)
+	log.Printf("Listening on %s", listenAddr)
 
 	for {
 		conn, err := listener.Accept()
