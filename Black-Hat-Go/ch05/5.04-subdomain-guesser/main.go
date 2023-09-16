@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"text/tabwriter"
 
 	"github.com/miekg/dns"
 )
@@ -29,11 +30,8 @@ func main() {
 
 	fqdns := make(chan string, *workerCountFlag)
 	gather := make(chan []lookupResult)
-
-	// 创建 workers
-	for i := 0; i < *workerCountFlag; i++ {
-		go worker(fqdns, gather, *serverFlag)
-	}
+	tracker := make(chan int)
+	var results []lookupResult
 
 	// 读取 wordlist 文件
 	fh, err := os.Open(*wordListFlag)
@@ -43,24 +41,49 @@ func main() {
 	defer fh.Close()
 	scanner := bufio.NewScanner(fh)
 
+	// 创建 workers
+	for i := 0; i < *workerCountFlag; i++ {
+		go worker(fqdns, gather, tracker, *serverFlag)
+	}
+
+	// 分派任务，分派完毕后关闭 fqdns channel
 	go func() {
 		for scanner.Scan() {
 			fqdns <- fmt.Sprintf("%s.%s", scanner.Text(), domainList[0])
 		}
+		close(fqdns)
 	}()
 
-	for r := range gather {
-		fmt.Println(r)
+	// 收集结果
+	go func() {
+		for r := range gather {
+			results = append(results, r...)
+		}
+	}()
+
+	// 通过 tracker 等待所有 worker 都执行完毕后，关闭 gather channel
+	for i := 0; i < *workerCountFlag; i++ {
+		<-tracker
 	}
+	close(gather)
+
+	// 输出
+	w := tabwriter.NewWriter(os.Stdout, 0, 8, 4, ' ', 0)
+	for _, result := range results {
+		fmt.Fprintf(w, "%s\t%s\n", result.Hostname, result.IPAddr)
+	}
+	w.Flush()
 }
 
-func worker(fqdns chan string, gather chan []lookupResult, serverAddr string) {
+func worker(fqdns chan string, gather chan []lookupResult, tracker chan int, serverAddr string) {
 	for fqdn := range fqdns {
+		log.Printf("Looking up for fqdn %s\n", fqdn)
 		results := lookup(fqdn, serverAddr)
 		if len(results) > 0 {
 			gather <- results
 		}
 	}
+	tracker <- 1
 }
 
 func lookupA(fqdn, serverAddr string) ([]string, error) {
