@@ -1,0 +1,3 @@
+google.com.,8.8.8.8:53
+facebook.com.,8.8.8.8:53
+baidu.com.,114.114.114.114:53
