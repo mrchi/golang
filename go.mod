@@ -6,6 +6,7 @@ require (
 	github.com/gorilla/mux v1.8.0
 	github.com/gorilla/websocket v1.5.0
 	github.com/headfirstgo/keyboard v0.0.0-20170926053303-9930bcf72703
+	github.com/lib/pq v1.10.9
 	github.com/miekg/dns v1.1.56
 	github.com/sirupsen/logrus v1.9.3
 	github.com/urfave/negroni v1.0.0
