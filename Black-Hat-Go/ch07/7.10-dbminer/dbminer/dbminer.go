@@ -48,7 +48,7 @@ func Search(m DatabaseMiner) error {
 			for _, field := range table.Columns {
 				for _, r := range re {
 					if r.MatchString(field) {
-						fmt.Println(database)
+						fmt.Println(database.Name, table.Name)
 						fmt.Printf("[+] HIT: %s\n", field)
 					}
 				}
