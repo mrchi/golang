@@ -3,6 +3,7 @@ module github.com/mrchi/golang
 go 1.21.0
 
 require (
+	github.com/google/gopacket v1.1.19
 	github.com/gorilla/mux v1.8.0
 	github.com/gorilla/websocket v1.5.0
 	github.com/headfirstgo/keyboard v0.0.0-20170926053303-9930bcf72703
