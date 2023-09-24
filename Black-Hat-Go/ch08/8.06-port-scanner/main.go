@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	TARGET             = "192.168.50.1"
-	WORKER_COUNT       = 100
+	TARGET             = "192.168.0.1"
+	WORKER_COUNT       = 1000
 	IFACE              = "en1"                                                   // Device
 	SNAPLEN      int32 = 320                                                     // 快照长度（每个帧要捕获的数据量）
 	PROMISC            = true                                                    // 是否以混杂模式运行
@@ -21,13 +21,13 @@ const (
 )
 
 func main() {
-	ports := make(chan int)
+	ports := make(chan int, WORKER_COUNT)
+	track := make(chan int)
 	pcapResults := make(map[string]int)
-	var openPorts []int
 
-	// 创建 100 个 goroutine worker
+	// 创建 goroutine worker
 	for i := 0; i < WORKER_COUNT; i++ {
-		go worker(ports)
+		go worker(ports, track)
 	}
 
 	// pcap 开始监听
@@ -35,16 +35,25 @@ func main() {
 
 	// 向 ports 中写入端口
 	go func() {
-		for i := 1; i <= 1024; i++ {
+		for i := 1; i <= 65535; i++ {
 			ports <- i
 		}
+		close(ports)
 	}()
 
+	// 等待全部 worker 完成
+	for i := 0; i < WORKER_COUNT; i++ {
+		<-track
+	}
+	close(track)
+
 	// 输出结果
-	fmt.Println(openPorts)
+	for port, confidence := range pcapResults {
+		fmt.Printf("Port %s open: confidence %d\n", port, confidence)
+	}
 }
 
-func worker(ports chan int) {
+func worker(ports, track chan int) {
 	for p := range ports {
 		// debug 日志
 		log.Printf("worker: scanning port %d\n", p)
@@ -56,6 +65,7 @@ func worker(ports chan int) {
 			conn.Close()
 		}
 	}
+	track <- 1
 }
 
 func capture(iface string, target string, results map[string]int) {
