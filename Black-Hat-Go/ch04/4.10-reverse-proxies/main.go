@@ -9,7 +9,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-const listenAddr string = "localhost:8000"
+const LISTEN_ADDR string = "localhost:8000"
 
 var (
 	hostProxy = make(map[string]string)
@@ -34,6 +34,6 @@ func main() {
 	for host, proxy := range proxies {
 		r.Host(host).Handler(proxy)
 	}
-	log.Printf("Listening on %s\n", listenAddr)
-	http.ListenAndServe(listenAddr, r)
+	log.Printf("Listening on %s\n", LISTEN_ADDR)
+	http.ListenAndServe(LISTEN_ADDR, r)
 }

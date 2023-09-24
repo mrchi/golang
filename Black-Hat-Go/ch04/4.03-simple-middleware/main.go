@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-const listenAddr string = "localhost:8000"
+const LISTEN_ADDR string = "localhost:8000"
 
 type logger struct {
 	Inner http.Handler
@@ -25,6 +25,6 @@ func hello(w http.ResponseWriter, r *http.Request) {
 func main() {
 	f := http.HandlerFunc(hello)
 	l := logger{Inner: f}
-	log.Printf("Listening on %s\n", listenAddr)
-	http.ListenAndServe(listenAddr, &l)
+	log.Printf("Listening on %s\n", LISTEN_ADDR)
+	http.ListenAndServe(LISTEN_ADDR, &l)
 }

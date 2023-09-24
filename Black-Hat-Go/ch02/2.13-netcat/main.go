@@ -7,14 +7,14 @@ import (
 	"os/exec"
 )
 
-const listenAddr string = "localhost:8000"
+const LISTEN_ADDR string = "localhost:8000"
 
 func main() {
-	listener, err := net.Listen("tcp", listenAddr)
+	listener, err := net.Listen("tcp", LISTEN_ADDR)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	log.Println("Listening on", listenAddr)
+	log.Println("Listening on", LISTEN_ADDR)
 
 	for {
 		conn, err := listener.Accept()

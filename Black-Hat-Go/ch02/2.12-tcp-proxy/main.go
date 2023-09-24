@@ -7,16 +7,16 @@ import (
 )
 
 const (
-	listenAddr          string = "localhost:80"
+	LISTEN_ADDR         string = "localhost:80"
 	DESTINATION_ADDRESS string = "httpbin.org:80"
 )
 
 func main() {
-	listener, err := net.Listen("tcp", listenAddr)
+	listener, err := net.Listen("tcp", LISTEN_ADDR)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	log.Println("Listening on", listenAddr)
+	log.Println("Listening on", LISTEN_ADDR)
 
 	for {
 		conn, err := listener.Accept()

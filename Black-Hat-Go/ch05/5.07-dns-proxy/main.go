@@ -13,7 +13,7 @@ import (
 	"github.com/miekg/dns"
 )
 
-const proxyConfigFilename = "proxy.txt"
+const PROXY_CONFIG_FILENAME = "proxy.txt"
 
 func parseConfig(filename string) (map[string]string, error) {
 	configs := make(map[string]string)
@@ -45,7 +45,7 @@ func parseConfig(filename string) (map[string]string, error) {
 func main() {
 	var configLock sync.RWMutex
 
-	configs, err := parseConfig(proxyConfigFilename)
+	configs, err := parseConfig(PROXY_CONFIG_FILENAME)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -98,7 +98,7 @@ func main() {
 			switch sig {
 			case syscall.SIGUSR1:
 				log.Println("SIGUSR1: reloading records")
-				updatedConfigs, err := parseConfig(proxyConfigFilename)
+				updatedConfigs, err := parseConfig(PROXY_CONFIG_FILENAME)
 
 				if err != nil {
 					log.Printf("SIGUSR1: reloading failed, err: %s\n", err)

@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-const listenAddr string = "localhost:8000"
+const LISTEN_ADDR string = "localhost:8000"
 
 type myHandler struct{}
 
@@ -24,6 +24,6 @@ func (h myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	log.Printf("Listening on %s\n", listenAddr)
-	http.ListenAndServe(listenAddr, myHandler{})
+	log.Printf("Listening on %s\n", LISTEN_ADDR)
+	http.ListenAndServe(LISTEN_ADDR, myHandler{})
 }

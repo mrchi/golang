@@ -8,10 +8,10 @@ import (
 	_ "github.com/lib/pq"
 )
 
-const PgURI = "postgres://chi:@localhost:5432/chi?sslmode=disable"
+const PG_URI = "postgres://chi:@localhost:5432/chi?sslmode=disable"
 
 func main() {
-	db, err := sql.Open("postgres", PgURI)
+	db, err := sql.Open("postgres", PG_URI)
 	if err != nil {
 		log.Panicln(err)
 	}

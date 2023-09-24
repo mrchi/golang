@@ -9,7 +9,7 @@ import (
 	"github.com/urfave/negroni"
 )
 
-const listenAddr string = "localhost:8000"
+const LISTEN_ADDR string = "localhost:8000"
 
 type trivial struct{}
 
@@ -34,6 +34,6 @@ func main() {
 	n.Use(trivial{})
 	n.UseHandler(r)
 
-	log.Printf("Listening on %s\n", listenAddr)
-	http.ListenAndServe(listenAddr, n)
+	log.Printf("Listening on %s\n", LISTEN_ADDR)
+	http.ListenAndServe(LISTEN_ADDR, n)
 }
