@@ -11,6 +11,7 @@ require (
 	github.com/miekg/dns v1.1.56
 	github.com/sirupsen/logrus v1.9.3
 	github.com/urfave/negroni v1.0.0
+	github.com/yuin/gopher-lua v1.1.0
 	go.mongodb.org/mongo-driver v1.12.1
 	golang.org/x/exp v0.0.0-20230905200255-921286631fa9
 )
