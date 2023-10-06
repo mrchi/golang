@@ -14,6 +14,8 @@ github.com/gorilla/websocket v1.5.0 h1:PPwGk2jz7EePpoHN/+ClbZu8SPxiqlu12wZP/3sWm
 github.com/gorilla/websocket v1.5.0/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/headfirstgo/keyboard v0.0.0-20170926053303-9930bcf72703 h1:dUWxlI5MeD7l7XKR5IruZBR6R+BrNJaJFQ/CMCL0whU=
 github.com/headfirstgo/keyboard v0.0.0-20170926053303-9930bcf72703/go.mod h1:6d1pa/JpFQHwXHOqD+gxvdJe30EkP5mnc3I6lE9yTaQ=
+github.com/joeljunstrom/go-luhn v0.0.0-20190413165225-1e071b33b576 h1:k82KNEG8vk59eHv/8xwBUh4dSR/t1wPiht4aDJm0SOY=
+github.com/joeljunstrom/go-luhn v0.0.0-20190413165225-1e071b33b576/go.mod h1:pE5zuSeg07RZZfWS158WpV7oUWb1++8T2jZ/UklLM3E=
 github.com/klauspost/compress v1.13.6 h1:P76CopJELS0TiO2mebmnzgWaajssP/EszplttgQxcgc=
 github.com/klauspost/compress v1.13.6/go.mod h1:/3/Vjq9QcHkK5uEr5lBEmyoZ1iFhe47etQ6QUkpK6sk=
 github.com/lib/pq v1.10.9 h1:YXG7RB+JIjhP29X+OtkiDnYaXQwpS4JEWq7dtCCRUEw=
