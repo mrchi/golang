@@ -15,7 +15,6 @@ import (
 )
 
 func handler(i int, s *goquery.Selection) {
-	log.Println(i)
 	url, ok := s.Find("a").Attr("href")
 	if !ok {
 		return
@@ -56,8 +55,8 @@ func main() {
 	fileType := os.Args[2]
 
 	q := fmt.Sprintf("site:%s filetype:%s", domain, fileType)
-	search := fmt.Sprintf("https://www.bing.com/search?q=%s", url.QueryEscape(q))
-	log.Println(search)
+	search := fmt.Sprintf("https://cn.bing.com/search?q=%s", url.QueryEscape(q))
+	log.Printf("Search URL: %s", search)
 
 	req, err := http.NewRequest("GET", search, nil)
 	if err != nil {
@@ -70,9 +69,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	data, err := io.ReadAll(resp.Body)
-	log.Println(string(data))
 
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {
