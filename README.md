@@ -59,7 +59,9 @@ Code snippets of golang learning.
 
 作者：刘丹冰 AceId
 
-## [Black-Hat-Go](Black-Hat-Go)
+## [Black-Hat-Go](Black-Hat-Go)✅
+
+**不推荐，中文版本中含有许多错误。**
 
 [Go黑帽子 渗透测试编程之道 \(豆瓣\)](https://book.douban.com/subject/35596332/)
 
